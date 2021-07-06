@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tac.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Dela+Gothic+One&family=Fredoka+One&family=Saira+Condensed:wght@700&display=swap" rel="stylesheet">
+    <title> TIC TAC TOE</title>
+    <style>
+        body {
+            height: 100vh;
+            background-color: #e8eaef;
+            vertical-align: middle;
+            /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+            margin-right: 25%;
+            margin-left: 25%;
+            position: relative;
+            /* opacity: 0.5; */
+            font-family: 'Chakra Petch', sans-serif;
+        }
+        
+        #heading {
+            margin-top: 0.5vh;
+            margin-bottom: 5vh;
+            text-align: center;
+            color: #363c42;
+            font-family: 'Saira Condensed', sans-serif;
+        }
+        
+        #desc {
+            text-align: center;
+        }
+        
+        #switch {
+            border-radius: 10px;
+            background-color: #b4c6d4;
+            margin-bottom: 5vh;
+            margin-top: 5vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6vw;
+            /* margin-left: 15%;
+    margin-right: 15%; */
+        }
+        
+        #sw1,
+        #sw2 {
+            width: 11vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 1vh;
+            margin-bottom: 2vh;
+            border-radius: 10px;
+            padding-bottom: 1vh;
+        }
+        
+        #sw1.show,
+        #sw2.show {
+            background-color: #dcdfe1;
+        }
+        
+        #swap {
+            /* padding: 1vh; */
+            border-radius: 10px;
+            color: honeydew;
+            font-size: 3vh;
+        }
+        
+        button {
+            background-color: #fff5f5;
+            width: 16vw;
+            height: 10vh;
+            border-radius: 10px;
+            border-style: none;
+            font-family: 'Fredoka One', cursive;
+            font-size: 5vh;
+            font-weight: 1000;
+            text-align: center;
+            /* padding-bottom: 10%; */
+            display: inline-block;
+            /* color: transparent; */
+        }
+        
+        button:hover {
+            background-color: #b4c6d4;
+            border-radius: 20px;
+            color: white;
+        }
+        
+        button:disabled,
+        button[disabled] {
+            color: black
+        }
+        
+        #swbutt {
+            width: 9vw;
+            height: 5vh;
+            font-size: 3vh;
+        }
+        
+        .butt {
+            /* position: absolute; */
+            margin-top: 8vh;
+            height: 31.5vh;
+            color: antiquewhite;
+            width: 100%;
+            /* padding-left: 25%;
+    padding-right: 25%; */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            /* padding-bottom: 10%; */
+        }
+        
+        .pop {
+            top: 20vh;
+            width: 100%;
+            height: 0;
+            /* z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+            color: black;
+            background-color: black;
+            opacity: 0;
+            border-radius: 25px;
+        }
+        
+        #popcontent {
+            height: 0;
+            color: white;
+            text-align: center;
+            justify-content: center;
+            justify-items: center;
+            margin: auto;
+            font-size: 5vh;
+            font-weight: 700;
+            font-family: 'Dela Gothic One', cursive;
+        }
+        
+        #popcontent.show {
+            height: 20vh;
+            padding: 20vh 0;
+        }
+        
+        .pop.show {
+            height: 50vh;
+            position: absolute;
+            opacity: 1;
+        }
+        
+        body.show {
+            opacity: 0.5;
+        }
+        
+        @media (min-width:1000px) {
+            body {
+                margin-right: 35%;
+                margin-left: 35%;
+            }
+            button {
+                width: 9.5vw;
+                height: 10.25vh;
+            }
+            #switch {
+                padding: 0 4vw;
+            }
+            #sw1,
+            #sw2 {
+                width: auto;
+            }
+        }
+        
+        #restart_butt {
+            background-color: #b4c6d4;
+            color: white;
+            font-size: 3vh;
+            font-weight: 400;
+            height: 6vh;
+            width: 30vw;
+            border-radius: 5px;
+            padding-bottom: 1vh;
+        }
+        
+        #restart {
+            margin-top: 4vh;
+            /* background-color: blue; */
+            font-size: 4vh;
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="heading">
+        <h1>TICTACTOE</h1>
+    </div>
+    <div style="display: flex; justify-content: space-around; 
+"><a href="online">online</a></div>
+
+    <div id="desc">
+        <p>this is a 2 player game</p>
+    </div>
+    <div id="switch">
+        <div id="sw1">
+
+
+            <div style="margin: auto;">
+                <button id="swbutt">X</button>
+            </div>
+        </div>
+
+        <div id="swap"> </div>
+
+        <div id="sw2">
+
+            <div style="margin: auto;">
+                <button id="swbutt">O</button>
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+    <div class="container">
+        <div class="butt">
+
+            <button class="cell" datacell></button>
+            <button class="cell" datacell></button>
+            <button class="cell" datacell></button><br>
+            <button class="cell" datacell></button>
+            <button class="cell" datacell></button>
+            <button class="cell" datacell></button><br>
+            <button class="cell" datacell></button>
+            <button class="cell" datacell></button>
+            <button class="cell" datacell></button>
+
+
+
+
+        </div>
+
+        <div class="pop">
+            <p id="popcontent"></p>
+        </div>
+    </div>
+
+    <br><br>
+    <div id="restart">
+        <button id="restart_butt">
+            restart
+        </button>
+    </div>
+    <script>
+        const cellelem = document.querySelectorAll('[datacell]');
+        const pop = document.querySelector('.pop')
+        const popcontent = document.querySelector('#popcontent')
+        const body = document.querySelector('body')
+        const restart = document.querySelector('#restart_butt')
+        const sw1 = document.querySelector('#sw1')
+        const sw2 = document.querySelector('#sw2')
+
+
+        restart.addEventListener('click', start)
+        const win = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+
+        ]
+        let flag
+        let turn
+
+        start()
+
+        // const swbutton = document.getElementById('swbutt');
+        // swbutton.addEventListener('click', switchclick);
+
+        // function switchclick() {
+        //     if (!turn) {
+        //         swbutton.innerHTML = 'O';
+        //         turn = !turn
+        //     } else {
+        //         swbutton.innerHTML = 'X';
+        //         turn = !turn
+
+        //     }
+        // }
+
+
+        function start() {
+
+            remove()
+            console.log('h')
+            restart.disabled = false
+
+
+            turn = 0
+            sw1.classList.add('show')
+            sw2.classList.remove('show')
+
+            cellelem.forEach(cell => {
+                cell.innerHTML = "";
+                cell.disabled = false
+                cell.addEventListener('click', clickevent, {
+                    once: true
+                });
+                cell.addEventListener('mouseover', onmouseover);
+                cell.addEventListener('mouseout', onmouseout);
+            })
+        }
+        let temp
+        let hoverflag
+
+        function add() {
+            body.classList.add('show')
+            popcontent.classList.add('show')
+
+            pop.classList.add('show')
+        }
+
+        function remove() {
+
+            popcontent.innerHTML = ``
+            body.classList.remove('show')
+            pop.classList.remove('show')
+            popcontent.classList.remove('show')
+
+        }
+
+        function onmouseout(e) {
+            const cell = e.target
+            cell.innerHTML = ""
+
+
+        }
+
+        function onmouseover(e) {
+            console.log("mouse")
+            const cell = e.target;
+            if (!turn) {
+
+                cell.innerHTML = 'X';
+
+            } else {
+
+                cell.innerHTML = 'O';
+
+
+            }
+        }
+
+        function clickevent(e) {
+
+            // swbutton.disabled = true;
+
+            const cell = e.target;
+            cell.disabled = true
+            if (!turn) {
+                cell.innerHTML = 'X';
+
+
+            } else {
+                cell.innerHTML = 'O';
+
+
+
+
+            }
+            temp = cell.innerHTML
+            if (iswin(temp)) {
+                cellelem.forEach(i => {
+                    i.disabled = true
+                })
+
+                restart.disabled = true
+                setTimeout(() => {
+                    popcontent.innerHTML = `${temp} WON`
+
+                    add()
+                    respawn()
+
+
+
+                }, 1000);
+
+            } else if (isdraw()) {
+
+                restart.disabled = true
+
+                setTimeout(() => {
+                    popcontent.innerHTML = `DRAW`
+                    add()
+                    respawn()
+
+
+                }, 1000);
+            }
+
+            hover();
+
+            turn = !turn
+        }
+
+        function hover() {
+            if (turn) {
+                sw2.classList.remove('show')
+                sw1.classList.add('show')
+
+
+            } else {
+                sw1.classList.remove('show')
+                sw2.classList.add('show')
+            }
+
+        }
+
+        function respawn() {
+            setTimeout(() => {
+                // location.reload();
+                start();
+
+            }, 3000);
+        }
+
+        function isdraw() {
+
+            return [...cellelem].every(cell => {
+                return (cell.innerHTML == 'X' || cell.innerHTML == 'O')
+            })
+        }
+
+        function iswin(e) {
+
+            return win.some(comb => {
+                return comb.every(i => {
+
+
+                    return (cellelem[i].innerHTML == (e))
+
+                })
+            })
+
+        }
+    </script>
+    <script src="toe.js"></script>
+</body>
+
+</html>
